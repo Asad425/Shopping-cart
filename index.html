@@ -20,7 +20,7 @@
       <div class="container">
         <div class="cart">
           <div class="col-md-12 col-lg-10 mx-auto">
-            <div class="cart-item">
+            <div id="removing1" class="cart-item">
               <div class="row">
                 <div class="col-md-7 center-item">
                   <img src="images/product-1.png" alt="" />
@@ -43,33 +43,33 @@
                     </button>
                   </div>
                   <h5>$<span id="phonePrice">1219</span></h5>
-                  <img src="images/remove.png" alt="" class="remove-item" />
+                  <img id="hide1" src="images/remove.png" alt="" class="remove-item" />
                 </div>
               </div>
             </div>
 
             <div class="cart-item">
-              <div class="row">
+              <div id="removing2" class="row">
                 <div class="col-md-7 center-item mx-auto">
                   <img src="images/product-2.png" alt="" />
                   <h5>iPhone 11 Silicone Case - Black</h5>
                 </div>
                 <div class="col-md-5 center-item">
                   <div class="input-group number-spinner">
-                    <button class="btn btn-default">
+                    <button id="coverBtnMinus" class="btn btn-default">
                       <i class="fas fa-minus"></i>
                     </button>
-                    <input
+                    <input id="coverInput"
                       type="text"
                       class="form-control text-center"
                       value="1"
                     />
-                    <button class="btn btn-default">
+                    <button id="coverBtnPlus" class="btn btn-default">
                       <i class="fas fa-plus"></i>
                     </button>
                   </div>
-                  <h5>$59</h5>
-                  <img src="images/remove.png" alt="" class="remove-item" />
+                  <h5>$<span id="coverValue">59</span></h5>
+                  <img  id="hide2"  src="images/remove.png" alt="" class="remove-item" />
                 </div>
               </div>
             </div>
@@ -109,9 +109,9 @@
 
         const phoneTotalPrice=priceCalculator('phonePrice',plusButtonValue);
         document.getElementById('phonePrice').innerText=phoneTotalPrice;
+
+
        
-      
-        
         
       });
 
@@ -125,6 +125,42 @@
         const phoneTotalPrice=priceCalculator('phonePrice',minusBtnValue);
         document.getElementById('phonePrice').innerText=phoneTotalPrice;
       });
+      //coverButton plus:
+      const coverBtn=document.getElementById('coverBtnPlus');
+      coverBtn.addEventListener('click', function(){
+
+        const CoverPlusButtonValue = plusBtnIncreaser("coverInput");
+        document.getElementById("coverInput").value =CoverPlusButtonValue; 
+      //cover total price:
+      var coverPrice=priceCalculator('coverValue',CoverPlusButtonValue);
+      document.getElementById('coverValue').innerText=coverPrice;
+
+      });
+      //cover Minus :
+      const coverMinusBtn=document.getElementById('coverBtnMinus');
+      coverMinusBtn.addEventListener('click', function(){
+
+        const CoverMinusButtonValue =buttonDecrease("coverInput");
+        document.getElementById("coverInput").value =CoverMinusButtonValue;
+
+        var coverPriceMinus=priceCalculator('coverValue',CoverMinusButtonValue);
+        document.getElementById('coverValue').innerText=coverPriceMinus;
+
+
+      });
+
+//close cart part:
+
+      var closeBtn=document.getElementById('hide1');
+      closeBtn.addEventListener('click',function(){
+        removeItem('removing1');
+      });
+      var closeBtn2=document.getElementById('hide2');
+      closeBtn2.addEventListener('click',function(){
+        removeItem('removing2');
+      });
+
+
 
       function plusBtnIncreaser(id) {
         var plusBtnValue = document.getElementById(id).value;
@@ -136,15 +172,21 @@
         var BtnValueNumber = parseInt(BtnValue);
         return --BtnValueNumber;
       }
-
       function priceCalculator(id, plusButtonValue){
-         document.getElementById('phonePrice').innerText="1219";
+        //  document.getElementById('phonePrice').innerText="1219";
+        //  document.getElementById('coverValue').innerText="59";
+         
          var phnPrice=document.getElementById(id).innerText;
          var phnPriceNumber=parseFloat(phnPrice);
          var totalPrice=phnPriceNumber*(plusButtonValue);
       
          return totalPrice;
          
+      }
+
+      function removeItem(id){
+        var itemToRemove=document.getElementById(id);
+        itemToRemove.style.display='none';
       }
     </script>
   </body>
