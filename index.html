@@ -26,8 +26,8 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <input id="plusInputValue" type="text" class="form-control text-center" value="1">
+                           <button id="plusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$1219</h5>
                         <img src="images/remove.png" alt="" class="remove-item">
@@ -77,6 +77,24 @@
          </div>
       </div>
    </section>
+
+   <script>
+
+      //Plus Button Section:
+
+      const plusButton=document.getElementById('plusBtn');
+      plusButton.addEventListener('click',function(){
+
+         const plusBtnValue=document.getElementById('plusInputValue').value;
+         console.log(plusBtnValue);
+         const plusBtnValueNumber=parseFloat(plusBtnValue);
+         document.getElementById('plusInputValue').value=plusBtnValueNumber+1;
+         
+
+      });
+      
+
+   </script>
 </body>
 
 </html>
