@@ -42,7 +42,7 @@
                       <i class="fas fa-plus"></i>
                     </button>
                   </div>
-                  <h5>$1219</h5>
+                  <h5>$<span id="phonePrice">1219</span></h5>
                   <img src="images/remove.png" alt="" class="remove-item" />
                 </div>
               </div>
@@ -105,22 +105,46 @@
       const plusButton = document.getElementById("plusBtn");
       plusButton.addEventListener("click", function () {
         const plusButtonValue = plusBtnIncreaser("inputValue");
+        document.getElementById("inputValue").value = plusButtonValue;
 
-        document.getElementById("inputValue").value = plusButtonValue + 1;
+        const phoneTotalPrice=priceCalculator('phonePrice',plusButtonValue);
+        document.getElementById('phonePrice').innerText=phoneTotalPrice;
+       
+      
+        
+        
       });
 
       //minus Button section:
 
       const minusButton = document.getElementById("minusBtn");
       minusButton.addEventListener("click", function () {
-        const minusBtnValue = plusBtnIncreaser("inputValue");
-        document.getElementById("inputValue").value = minusBtnValue - 1;
+        const minusBtnValue = buttonDecrease("inputValue");
+        document.getElementById("inputValue").value = minusBtnValue;
+
+        const phoneTotalPrice=priceCalculator('phonePrice',minusBtnValue);
+        document.getElementById('phonePrice').innerText=phoneTotalPrice;
       });
 
       function plusBtnIncreaser(id) {
-        const plusBtnValue = document.getElementById(id).value;
-        const plusBtnValueNumber = parseFloat(plusBtnValue);
-        return plusBtnValueNumber;
+        var plusBtnValue = document.getElementById(id).value;
+        var plusBtnValueNumber = parseInt(plusBtnValue);
+        return ++plusBtnValueNumber;
+      }
+      function buttonDecrease(id){
+        var BtnValue = document.getElementById(id).value;
+        var BtnValueNumber = parseInt(BtnValue);
+        return --BtnValueNumber;
+      }
+
+      function priceCalculator(id, plusButtonValue){
+         document.getElementById('phonePrice').innerText="1219";
+         var phnPrice=document.getElementById(id).innerText;
+         var phnPriceNumber=parseFloat(phnPrice);
+         var totalPrice=phnPriceNumber*(plusButtonValue);
+      
+         return totalPrice;
+         
       }
     </script>
   </body>
